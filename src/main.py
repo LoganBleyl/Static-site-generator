@@ -1,7 +1,8 @@
 from enum import Enum
+import sys
 from textnode import TextNode, TextType
 from markdown_blocks import markdown_to_html_node
-from gencontent import extract_title, generate_page
+from gencontent import extract_title, generate_page, generate_pages_recursive
 import os
 import shutil
 
@@ -22,8 +23,13 @@ def main():
     
     this_dir = os.path.dirname(__file__)
     project_root = os.path.join(this_dir, "..")
-    public_dir = os.path.join(project_root, "public")
+    public_dir = os.path.join(project_root, "docs")
     static_dir = os.path.join(project_root, "static")
+    
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
+    else:
+        basepath = "/"
 
     if os.path.exists(public_dir):
         shutil.rmtree(public_dir)
@@ -35,11 +41,7 @@ def main():
     content_dir = os.path.join(project_root, "content")
     template_path = os.path.join(project_root, "template.html")
 
-    generate_page(
-        os.path.join(content_dir, "index.md"),
-        template_path,
-        os.path.join(public_dir, "index.html"),
-        )
+    generate_pages_recursive(content_dir, template_path, public_dir, basepath)
 
 main()
 
