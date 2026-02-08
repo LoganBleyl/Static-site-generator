@@ -116,7 +116,5 @@ class TestHTMLNode(unittest.TestCase):
         self.assertEqual(html_node.tag, "b")
         self.assertEqual(html_node.value, "This is a text node")
 
-
-
 if __name__ == "__main__":
     unittest.main()

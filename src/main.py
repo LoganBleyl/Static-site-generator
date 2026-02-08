@@ -1,5 +1,7 @@
 from enum import Enum
 from textnode import TextNode, TextType
+from markdown_blocks import markdown_to_html_node
+from gencontent import extract_title, generate_page
 import os
 import shutil
 
@@ -30,4 +32,15 @@ def main():
 
     copy_recursive(static_dir, public_dir)
 
+    content_dir = os.path.join(project_root, "content")
+    template_path = os.path.join(project_root, "template.html")
+
+    generate_page(
+        os.path.join(content_dir, "index.md"),
+        template_path,
+        os.path.join(public_dir, "index.html"),
+        )
+
 main()
+
+

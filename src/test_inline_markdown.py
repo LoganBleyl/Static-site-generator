@@ -112,6 +112,5 @@ class TestInlineMarkdown(unittest.TestCase):
             ]
         self.assertListEqual(splits, new_splits)
 
-
 if __name__ == "__main__":
     unittest.main()
